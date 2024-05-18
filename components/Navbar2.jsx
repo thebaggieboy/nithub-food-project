@@ -65,7 +65,7 @@ export default function NavBar() {
           <div  className="hidden lg:flex lg:gap-x-12 bold mr-10">
            <h2 style={{fontWeight:'bold'}}>NAIJA FOOD PRICE PROJECT</h2>
           </div>
-          <div  className="ml-10 hidden lg:flex lg:gap-x-12">
+          <div  className="ml-10 hidden lg:flex lg:gap-x-12 overflow-x-visible">
             {navigation.map((item) => (
               <a style={{borderRadius:50, border:"1px green solid", padding:5, width:80, fontSize:12, fontWeight:'lighter', fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:5}} key={item.name} href={item.href} className="font-semibold leading-6  hover:text-white hover:bg-green-800 ml-3">
                 <Link href={item.href}>{item.name}</Link>

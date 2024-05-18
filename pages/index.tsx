@@ -5,7 +5,9 @@ import Main from "../components/Main";
 export default function Home() {
   return (
    <>
-    <Main/>
+  <div className="bg-gray-50">
+  <Main/>
+  </div>
    
 
 
