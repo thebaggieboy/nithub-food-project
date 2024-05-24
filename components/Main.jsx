@@ -35,13 +35,13 @@ export default function Main() {
      
   <ul class="flex flex-wrap space-x-2 pt-4  mt-1 ml-10 pl-10 text-sm font-medium text-center text-gray-500 dark:text-gray-400">
       <li class="me-2">
-          <a href="#" style={{borderRadius:50, fontSize:10}} class="inline-block px-4 py-1 text-green-900 bold text-xs bg-green-200 rounded-lg active" aria-current="page">Daily</a>
+          <a href="#" style={{borderRadius:50, fontSize:10}} class="inline-block px-4 py-1 text-green-900 bold text-xs bg-green-200 rounded-lg active" aria-current="page">Week</a>
       </li>
       <li class="me-2">
           <a href="#" style={{borderRadius:50, fontSize:10}}  class="inline-block px-4 py-1 text-xs rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">Last month</a>
       </li>
       <li class="me-2">
-          <a href="#" style={{borderRadius:50, fontSize:10}} class="inline-block px-4 py-1 text-xs rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">last week</a>
+          <a href="#" style={{borderRadius:50, fontSize:10}} class="inline-block px-4 py-1 text-xs rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">2024</a>
       </li>
   
   </ul>

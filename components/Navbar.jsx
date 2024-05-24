@@ -1,4 +1,5 @@
-import { useState, Fragment } from 'react'
+
+import { useState, Fragment, useEffect } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Popover, Transition } from '@headlessui/react'
 import Link from 'next/link'
@@ -18,6 +19,13 @@ import {
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
+
+import NBS_DASHBOARD from "../data/nbs_dashboard.json"
+import SUPERMARKETS_DASHBOARD from "../data/supermarkets_dashboard.json"
+import { Dropdown } from "flowbite-react";
+
+
 
 const navigation = [
   { name: 'Food Item', href: '/' },
@@ -29,17 +37,62 @@ const navigation = [
 
 
 
+
 export default function NavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [resultReady, setResultReady] = useState(true)
+  const [options, setOptions] = useState([]);
+  const [error, setError] = useState(null);
+  const [result, setResult] = useState([]); 
+
+
+  useEffect(() => {
+    async function getJson() {
+  
+      console.log("NBS_DASHBOARD: ", NBS_DASHBOARD);
+      console.log("SUPERMARKETS_DASHBOARD: ", SUPERMARKETS_DASHBOARD);
+      setResultReady(true)
+  
+      var json = NBS_DASHBOARD
+      console.log("JSON EXAMPLE", json[0]);
+
+    var results=[];
+    for (let key in json[0]) {
+  
+     
+      //console.log("Keys: ", key)
+     
+      let resultKeys = (`${key}`)
+      results.push(key)
+      setResult(results)
+     
+   
+    }
+    console.log("Result Keys: ", results)
+      console.log("Results State: ", result)
+      } 
+    getJson()
+  }, [])
+
+  
+
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+
   const router = useRouter()
   const path = router.pathname
   
   console.log("The current path for this route is ", path)
   return (
     <>
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    {/* { <Head>
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
       <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
       
+     </Head>} */}
     <div className="isolate  ">
       <div className="absolute inset-x-0 top-[-10rem] transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]">
       
@@ -66,11 +119,47 @@ export default function NavBar() {
            <h2 style={{fontWeight:'bold'}}>NAIJA FOOD PRICE PROJECT</h2>
           </div>
           <div  className="ml-10 hidden lg:flex lg:gap-x-12 overflow-x-visible">
-            {navigation.map((item) => (
-              <a style={{borderRadius:50, border:"1px green solid", padding:5, width:80, fontSize:12, fontWeight:'lighter', fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:5}} key={item.name} href={item.href} className="font-semibold leading-6  hover:text-white hover:bg-green-800 ml-3">
-                <Link href={item.href}>{item.name}</Link>
-              </a>
-            ))}
+         
+         
+<div  style={{borderRadius:50, border:"1px green solid", padding:10, width:100, fontSize:12, fontWeight:'lighter', color:"black", fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:5}}  className=" hover:text-white   hover:bg-green-800 ml-3">
+<Dropdown inline label="Food Item" >
+
+{result.map(item=>(
+  <>
+   <Dropdown.Item>
+      {item}
+</Dropdown.Item>
+
+  </>
+))}
+
+  </Dropdown>
+
+</div>
+<div  style={{borderRadius:50, border:"1px green solid", padding:10, width:100, fontSize:12, fontWeight:'lighter', color:"black", fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:5}}  className=" hover:text-white   hover:bg-green-800 ml-3">
+<Dropdown inline label="Item Type" >
+  <Dropdown.Item>
+    Food Item 1
+  </Dropdown.Item>
+  <Dropdown.Item>
+    Food Item 2
+  </Dropdown.Item>
+  
+</Dropdown>
+
+</div>
+<div  style={{borderRadius:50, border:"1px green solid", padding:10, width:100, fontSize:12, fontWeight:'lighter', color:"black", fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:5}}  className=" hover:text-white   hover:bg-green-800 ml-3">
+<Dropdown inline label="Category" >
+  <Dropdown.Item>
+    Food Item 1
+  </Dropdown.Item>
+  <Dropdown.Item>
+    Food Item 2
+  </Dropdown.Item>
+  
+</Dropdown>
+
+</div>
           </div>
        
           

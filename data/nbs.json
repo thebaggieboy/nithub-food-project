@@ -1,0 +1,54 @@
+{
+    "beans": {
+      "brown": {"id": 1, "quantity": ["1000 g"]},
+      "white black eye": {"id": 2, "quantity": ["1000 g"]}
+    },
+    "beef": {
+      "bone in": {"id": 3, "quantity": ["1000 g"]},
+      "boneless": {"id": 4, "quantity": ["1000 g"]}
+    },
+    "bread": {
+      "sliced": {"id": 5, "quantity": ["1 loaf"]},
+      "unsliced": {"id": 6, "quantity": ["1 loaf"]}
+    },
+    "chicken": {
+      "feet": {"id": 7, "quantity": ["1000 g"]},
+      "frozen": {"id": 8, "quantity": ["1 unit"]},
+      "wings": {"id": 9, "quantity": ["1000 g"]}
+    },
+    "eggs": {
+      "agric": {"id": 10, "quantity": ["12 pcs", "1 pcs"]}
+    },
+    "fish": {
+      "catfish smoked": {"id": 11, "quantity": ["1000 g"]},
+      "fish": {"id": 12, "quantity": ["1000 g"]}
+    },
+    "garri": {
+      "white": {"id": 13, "quantity": ["1000 g"]},
+      "yellow": {"id": 14, "quantity": ["1000 g"]}
+    },
+    "milk": {
+      "evaporated tin": {"id": 15, "quantity": ["1 unit"]}
+    },
+    "oil": {
+      "groundnut": {"id": 16, "quantity": ["1000 ml"]},
+      "palm": {"id": 17, "quantity": ["1000 ml"]},
+      "vegetable": {"id": 18, "quantity": ["1000 ml"]}
+    },
+    "potato": {
+      "irish": {"id": 19, "quantity": ["1000 g"]},
+      "sweet": {"id": 20, "quantity": ["1000 g"]}
+    },
+    "rice": {
+      "imported": {"id": 21, "quantity": ["1000 g"]},
+      "local": {"id": 22, "quantity": ["1000 g"]},
+      "ofada": {"id": 23, "quantity": ["1000 g"]}
+    },
+    "tomato": {
+      "tomato": {"id": 24, "quantity": ["1000 g"]}
+    },
+    "yam": {
+      "tuber": {"id": 25, "quantity": ["1000 g"]}
+    }
+  }
+  
