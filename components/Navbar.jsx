@@ -1,7 +1,7 @@
 
 import { useState, Fragment, useEffect } from 'react'
 import { Dialog } from '@headlessui/react'
-import { Popover, Transition } from '@headlessui/react'
+import { Transition } from '@headlessui/react'
 import Link from 'next/link'
 import {
   ArrowPathIcon,
@@ -25,6 +25,7 @@ import NBS_DASHBOARD from "../data/nbs.json"
 import SUPERMARKETS_DASHBOARD from "../data/supermarkets_dashboard.json"
 import { Dropdown } from "flowbite-react";
 
+import { Button, Popover } from "flowbite-react";
 
 
 const navigation = [
@@ -35,6 +36,16 @@ const navigation = [
  
 ]
 
+const content = (
+  <div className="w-64 text-sm text-gray-500 dark:text-gray-400">
+    <div className="border-b border-gray-200 bg-gray-100 px-3 py-2 dark:border-gray-600 dark:bg-gray-700">
+      <h3 className="font-semibold text-gray-900 dark:text-white">Popover title</h3>
+    </div>
+    <div className="px-3 py-2">
+      <p>And here's some amazing content. It's very engaging. Right?</p>
+    </div>
+  </div>
+);
 
 
 
@@ -46,70 +57,44 @@ export default function NavBar() {
   const [result, setResult] = useState([]); 
   const [resultItemType, setResultItemType] = useState([]); 
   var results=[];
-  var itemResults =[]
+  var itemResults = []
 
   useEffect(() => {
-    async function getJson() {
+   
   
       console.log("NBS_DASHBOARD: ", NBS_DASHBOARD[0]);
-      console.log("SUPERMARKETS_DASHBOARD: ", SUPERMARKETS_DASHBOARD);
+
       setResultReady(true)
   
       var json = NBS_DASHBOARD
       console.log("JSON EXAMPLE", json[0]);
-
-  
+ 
     
     for (let key in json[0]) {
   
-     
+      var json_type = NBS_DASHBOARD[0][key][0]
+
+  
       console.log("Keys: ", key)
      
       let resultKeys = (`${key}`)
       results.push(key)
 
       setResult(results)
-      
-      const item_type = `${json[0]}.${key}`
-      itemResults.push(item_type)
-      setResultItemType(item_type)
- 
-      console.log(item_type)
-    
+
+      itemResults.push(json_type)
+     
+      console.log("Result Types: ",  json_type)
+   
     
     }
+    setResultItemType(itemResults)
     console.log("Result Keys: ", results)
-    console.log("Key Sub Categories", itemResults)
-      } 
-    getJson()
-
-
-  //  { async function getJsonItemType() {
-  
-  //     console.log("NBS_DASHBOARD: ", NBS_DASHBOARD);
-  //     console.log("SUPERMARKETS_DASHBOARD: ", SUPERMARKETS_DASHBOARD);
-     
-  
-  //     var json = NBS_DASHBOARD
-  //     console.log("JSON EXAMPLE", json[0]);
-
-  //   var results=[];
+    console.log("Item Types: ", resultItemType)
     
-  //   for (let key in json[0]) {
-  
-     
-  //     //console.log("Keys: ", key)
-     
-  //     let resultKeys = (`${key}`)
-  //     results.push(key)
-  //     setResult(results)
-     
-   
-  //   }
-  //   console.log("Result Keys: ", results)
-  //     console.log("Results State: ", result)
-  //     } 
-  //   getJsonItemType()}
+
+
+
   }, [])
 
   
@@ -126,11 +111,7 @@ export default function NavBar() {
   console.log("The current path for this route is ", path)
   return (
     <>
-    {/* { <Head>
-     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-      
-     </Head>} */}
+
     <div className="isolate  ">
       <div className="absolute inset-x-0 top-[-10rem] transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]">
       
@@ -165,7 +146,7 @@ export default function NavBar() {
 {result.map(item=>(
   <>
    <Dropdown.Item>
-      {item}
+   {item}
 </Dropdown.Item>
 
   </>
@@ -176,9 +157,9 @@ export default function NavBar() {
 </div>
 <div  style={{borderRadius:50, border:"1px green solid", padding:10, width:100, fontSize:10, fontWeight:'lighter', color:"black", fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:10}}  className=" hover:text-white   hover:bg-green-800 ml-3">
 <Dropdown inline label="Item Type" >
-{itemResults.map(item=>(
+{resultItemType.map(item=>(
   <>
-   <Dropdown.Item>
+   <Dropdown.Item style={{color:"black"}}>
       {item}
 </Dropdown.Item>
 

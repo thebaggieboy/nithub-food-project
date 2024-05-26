@@ -1,4 +1,4 @@
-import { AreaChart, EventProps } from '@tremor/react';
+import { AreaChart, EventProps, BarChart } from '@tremor/react';
 import { useState, Fragment, useEffect } from 'react'
 
 
@@ -10,18 +10,18 @@ const averagePriceYearData = [{"average_price":455.41,"year":2016},{"average_pri
 const dataFormatter = (number) =>
   `$${Intl.NumberFormat('us').format(number).toString()}`;
 
-export default function AreaChartHero() {
+export default function AveragePerYearChart() {
     const [value, setValue] = useState(null);
      
     
   return (
   <>
      <div className="p-10">
-     <AreaChart
+     <BarChart
         className="mt-4 p-10 h-72"
-        data={chartDataDate}
-        index="date"
-        categories={['value']}
+        data={averagePriceYearData}
+        index="year"
+        categories={['average_price']}
         colors={['green', 'red']}
         yAxisWidth={65}
         onValueChange={(v) => setValue(v)}
