@@ -134,8 +134,8 @@ export default function NavBar() {
               <Bars3Icon className="h-6 w-6 sm:hidden" aria-hidden="true" />
             </button>
           </div>
-          <div  className="hidden lg:flex lg:gap-x-12 bold mr-10">
-           <h2 style={{fontWeight:'bold'}}>NAIJA FOOD PRICE PROJECT</h2>
+          <div style={{textAlign:"center",  maxWidth:"fit-content", marginInline:"auto"}} className="hidden lg:flex lg:gap-x-12 bold">
+           <h2 style={{fontWeight:'bold', textAlign:"center", maxWidth:"fit-content", marginInline:"auto"}}>NAIJA FOOD PRICE PROJECT</h2>
           </div>
           <div  className="ml-10 hidden lg:flex lg:gap-x-12 overflow-x-visible">
          
