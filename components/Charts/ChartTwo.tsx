@@ -72,7 +72,7 @@ const options: ApexOptions = {
 interface ChartTwoState {
   series: {
     name: string;
-    data: number[];
+    data: object[];
   }[];
 }
 

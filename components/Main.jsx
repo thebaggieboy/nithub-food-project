@@ -5,7 +5,7 @@ import ChartTwo from "./Charts/ChartTwo"
 import ChartThree from "./Charts/ChartThree"
 import ChartFour from "./Charts/ChartFour"
 import ChartFive from "./Charts/ChartFour"
-
+import AreaChart from "./Charts/AreaChart"
 
 export default function Main() {
   return (
@@ -17,7 +17,7 @@ export default function Main() {
 
   <div  className="flex p-2 ">
   <div className="p-5 mr-5 pr-5">
-          <h4 style={{fontWeight:"light", fontSize:15}}>Average price per day</h4>
+          <h4 style={{fontWeight:"light", fontSize:15}}>Current Daily Price</h4>
 
           <ul class="flex space-x-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400">
       <li class="me-2">
@@ -35,13 +35,13 @@ export default function Main() {
      
   <ul class="flex flex-wrap space-x-2 pt-4  mt-1 ml-10 pl-10 text-sm font-medium text-center text-gray-500 dark:text-gray-400">
       <li class="me-2">
-          <a href="#" style={{borderRadius:50, fontSize:10}} class="inline-block px-4 py-1 text-green-900 bold text-xs bg-green-200 rounded-lg active" aria-current="page">Week</a>
+          <a href="#" style={{borderRadius:50, fontSize:10}} class="inline-block px-4 py-1 text-green-900 bold text-xs bg-green-200 rounded-lg active" aria-current="page">Daily</a>
       </li>
       <li class="me-2">
           <a href="#" style={{borderRadius:50, fontSize:10}}  class="inline-block px-4 py-1 text-xs rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">Last month</a>
       </li>
       <li class="me-2">
-          <a href="#" style={{borderRadius:50, fontSize:10}} class="inline-block px-4 py-1 text-xs rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">2024</a>
+          <a href="#" style={{borderRadius:50, fontSize:10}} class="inline-block px-4 py-1 text-xs rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">last week</a>
       </li>
   
   </ul>
@@ -54,12 +54,10 @@ export default function Main() {
      </div>
      <div class=" bg-gray-50 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 p-10">
     <div class=" p-4">
-      <ChartOne/>
+        <AreaChart/>
     </div>
     <div class=" p-4"><ChartOne/></div>
-    <div class=" p-4"><ChartThree/></div>
-    
-    <div class=" p-4"><ChartTwo/></div>
+  
 </div>
 
 

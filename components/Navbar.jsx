@@ -21,7 +21,7 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
-import NBS_DASHBOARD from "../data/nbs_dashboard.json"
+import NBS_DASHBOARD from "../data/nbs.json"
 import SUPERMARKETS_DASHBOARD from "../data/supermarkets_dashboard.json"
 import { Dropdown } from "flowbite-react";
 
@@ -44,34 +44,72 @@ export default function NavBar() {
   const [options, setOptions] = useState([]);
   const [error, setError] = useState(null);
   const [result, setResult] = useState([]); 
-
+  const [resultItemType, setResultItemType] = useState([]); 
+  var results=[];
+  var itemResults =[]
 
   useEffect(() => {
     async function getJson() {
   
-      console.log("NBS_DASHBOARD: ", NBS_DASHBOARD);
+      console.log("NBS_DASHBOARD: ", NBS_DASHBOARD[0]);
       console.log("SUPERMARKETS_DASHBOARD: ", SUPERMARKETS_DASHBOARD);
       setResultReady(true)
   
       var json = NBS_DASHBOARD
       console.log("JSON EXAMPLE", json[0]);
 
-    var results=[];
+  
+    
     for (let key in json[0]) {
   
      
-      //console.log("Keys: ", key)
+      console.log("Keys: ", key)
      
       let resultKeys = (`${key}`)
       results.push(key)
+
       setResult(results)
-     
-   
+      
+      const item_type = `${json[0]}.${key}`
+      itemResults.push(item_type)
+      setResultItemType(item_type)
+ 
+      console.log(item_type)
+    
+    
     }
     console.log("Result Keys: ", results)
-      console.log("Results State: ", result)
+    console.log("Key Sub Categories", itemResults)
       } 
     getJson()
+
+
+  //  { async function getJsonItemType() {
+  
+  //     console.log("NBS_DASHBOARD: ", NBS_DASHBOARD);
+  //     console.log("SUPERMARKETS_DASHBOARD: ", SUPERMARKETS_DASHBOARD);
+     
+  
+  //     var json = NBS_DASHBOARD
+  //     console.log("JSON EXAMPLE", json[0]);
+
+  //   var results=[];
+    
+  //   for (let key in json[0]) {
+  
+     
+  //     //console.log("Keys: ", key)
+     
+  //     let resultKeys = (`${key}`)
+  //     results.push(key)
+  //     setResult(results)
+     
+   
+  //   }
+  //   console.log("Result Keys: ", results)
+  //     console.log("Results State: ", result)
+  //     } 
+  //   getJsonItemType()}
   }, [])
 
   
@@ -121,8 +159,8 @@ export default function NavBar() {
           <div  className="ml-10 hidden lg:flex lg:gap-x-12 overflow-x-visible">
          
          
-<div  style={{borderRadius:50, border:"1px green solid", padding:10, width:100, fontSize:12, fontWeight:'lighter', color:"black", fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:5}}  className=" hover:text-white   hover:bg-green-800 ml-3">
-<Dropdown inline label="Food Item" >
+<div  style={{borderRadius:50, border:"1px green solid", padding:10, width:100, fontSize:10, fontWeight:'lighter', color:"black", fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:10}}  className=" hover:text-white   hover:bg-green-800 ml-3">
+<Dropdown inline label="Food Item">
 
 {result.map(item=>(
   <>
@@ -136,19 +174,21 @@ export default function NavBar() {
   </Dropdown>
 
 </div>
-<div  style={{borderRadius:50, border:"1px green solid", padding:10, width:100, fontSize:12, fontWeight:'lighter', color:"black", fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:5}}  className=" hover:text-white   hover:bg-green-800 ml-3">
+<div  style={{borderRadius:50, border:"1px green solid", padding:10, width:100, fontSize:10, fontWeight:'lighter', color:"black", fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:10}}  className=" hover:text-white   hover:bg-green-800 ml-3">
 <Dropdown inline label="Item Type" >
-  <Dropdown.Item>
-    Food Item 1
-  </Dropdown.Item>
-  <Dropdown.Item>
-    Food Item 2
-  </Dropdown.Item>
+{itemResults.map(item=>(
+  <>
+   <Dropdown.Item>
+      {item}
+</Dropdown.Item>
+
+  </>
+))}
   
 </Dropdown>
 
 </div>
-<div  style={{borderRadius:50, border:"1px green solid", padding:10, width:100, fontSize:12, fontWeight:'lighter', color:"black", fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:5}}  className=" hover:text-white   hover:bg-green-800 ml-3">
+<div  style={{borderRadius:50, border:"1px green solid", padding:10, width:100, fontSize:10, fontWeight:'lighter', color:"black", fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:10}}  className=" hover:text-white   hover:bg-green-800 ml-3">
 <Dropdown inline label="Category" >
   <Dropdown.Item>
     Food Item 1

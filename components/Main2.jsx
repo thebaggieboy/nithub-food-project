@@ -5,9 +5,15 @@ import ChartTwo from "./Charts/ChartTwo"
 import ChartThree from "./Charts/ChartThree"
 import ChartFour from "./Charts/ChartFour"
 import ChartFive from "./Charts/ChartFour"
+import AreaChart from "./Charts/AreaChart"
+
+import Date from "./DatePicker"
+import { Dropdown } from "flowbite-react";
+import Link from 'next/link'
 
 
-export default function Main() {
+
+export default function Main2() {
   return (
     <>
      <div className="bg-gray-50  p-10">
@@ -17,7 +23,7 @@ export default function Main() {
 
   <div  className="flex p-2 ">
   <div className="p-5 mr-5 pr-5">
-          <h4 style={{fontWeight:"light", fontSize:15}}>Average price per year</h4>
+          <h4 style={{fontWeight:"light", fontSize:15}}>Current Month Price</h4>
 
           <ul class="flex space-x-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400">
       <li class="me-2">
@@ -33,15 +39,23 @@ export default function Main() {
       </div>
   
      
-  <ul class="flex flex-wrap space-x-2 pt-4  mt-1 ml-10 pl-10 text-sm font-medium text-center text-gray-500 dark:text-gray-400">
-      <li class="me-2">
-          <a href="#" style={{borderRadius:50, fontSize:10}} class="inline-block px-4 py-1 text-green-900 bold text-xs bg-green-200 rounded-lg active" aria-current="page">Current year</a>
+  <ul class="flex flex-wrap space-x-2 pt-4  mt-2 ml-10 pl-10 text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+      <li class="me-2 mt-2">
+      <span class="bg-green-800 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"></span> Current Year
+      </li>
+      <li class="me-2 mt-2">
+      <span class="bg-green-400 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"></span> Previous Year
       </li>
       <li class="me-2">
-          <a href="#" style={{borderRadius:50, fontSize:10}}  class="inline-block px-4 py-1 text-xs rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">Previous year</a>
-      </li>
-      <li class="me-2">
-          <a href="#" style={{borderRadius:50, fontSize:10}} class="inline-block px-4 py-1 text-xs rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">2024</a>
+      <div className="p-10 ml-5">
+<Dropdown className="" dismissOnClick={true} label="2024" style={{backgroundColor:"white",textAlign:"center", color:"black", border:"1px solid green", fontSize:8, maxWidth:"fit-content", marginInline:"auto" }}>
+      <Dropdown.Item as={Link} href="?dashboard=Daily">
+        
+      </Dropdown.Item>
+  
+</Dropdown>
+</div>
+
       </li>
   
   </ul>
@@ -54,12 +68,10 @@ export default function Main() {
      </div>
      <div class=" bg-gray-50 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 p-10">
     <div class=" p-4">
-      <ChartOne/>
+        <AreaChart/>
     </div>
     <div class=" p-4"><ChartOne/></div>
-    <div class=" p-4"><ChartThree/></div>
-    
-    <div class=" p-4"><ChartTwo/></div>
+  
 </div>
 
 

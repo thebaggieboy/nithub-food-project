@@ -10,7 +10,7 @@ interface ChartThreeState {
 
 const options: ApexOptions = {
   chart: {
-    type: "donut",
+    type: "line",
   },
   colors: ["#10B981", "#375E83", "#259AE6", "#FFA70B"],
   labels: ["Remote", "Hybrid", "Onsite", "Leave"],
