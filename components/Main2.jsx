@@ -32,7 +32,7 @@ console.log(average_month_price.percentage_change)
 
           <ul class="flex space-x-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400">
       <li class="me-2">
-      <h3 style={{color:"black", fontSize:25}} className="flex font-bold text-lg pt-1 text-black">$1.74M</h3>
+      <h3 style={{color:"black", fontSize:25}} className="flex font-bold text-lg pt-1 text-black">₦{average_month_price.current_month_price}</h3>
 
       </li>
       <li class="me-2 mt-1">
