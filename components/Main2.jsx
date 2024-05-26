@@ -47,10 +47,10 @@ console.log(average_month_price.percentage_change)
      
   <ul class="flex flex-wrap space-x-2 pt-4  mt-2 ml-10 pl-10 text-sm font-medium text-center text-gray-500 dark:text-gray-400">
       <li class="me-2 mt-2">
-      <span class="bg-green-800 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"></span> Current Year
+      <span class="bg-green-800 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"></span> Current Year
       </li>
       <li class="me-2 mt-2">
-      <span class="bg-green-400 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"></span> Previous Year
+      <span class="bg-green-400 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"></span> Previous Year
       </li>
       <li class="me-2">
       <div className="p-10 ml-5">
