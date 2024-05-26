@@ -1,10 +1,6 @@
 import React from 'react'
 
 import ChartOne from "./Charts/ChartOne"
-import ChartTwo from "./Charts/ChartTwo"
-import ChartThree from "./Charts/ChartThree"
-import ChartFour from "./Charts/ChartFour"
-import ChartFive from "./Charts/ChartFour"
 import AreaChart from "./Charts/AreaChart"
 
 export default function Main() {

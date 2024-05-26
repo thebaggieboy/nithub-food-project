@@ -1,10 +1,6 @@
 import React from 'react'
 
-import ChartOne from "./Charts/ChartOne"
-import ChartTwo from "./Charts/ChartTwo"
-import ChartThree from "./Charts/ChartThree"
-import ChartFour from "./Charts/ChartFour"
-import ChartFive from "./Charts/ChartFour"
+
 import AreaChart from "./Charts/AreaChart"
 
 import Date from "./DatePicker"
@@ -16,6 +12,13 @@ import AveragePerYearChart from "./Charts/AveragePerYearChart"
 
 
 export default function Main2() {
+  const average_month_price = {
+    "current_month_price": 2501.99,
+    "month": "5",
+    "percentage_change": 9.24,
+    "previous_month_price": 2290.29
+}
+console.log(average_month_price.percentage_change)
   return (
     <>
      <div className="bg-gray-50  p-10">
@@ -33,7 +36,7 @@ export default function Main2() {
 
       </li>
       <li class="me-2 mt-1">
-      <span class="inline-flex bg-green-100 text-green-800  text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">14.8%</span>
+      <span class="inline-flex bg-green-100 text-green-800  text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">{average_month_price.percentage_change}%</span>
       </li>
     
   
