@@ -9,6 +9,7 @@ import Link from 'next/link'
 
 import AveragePerYearChart from "./Charts/AveragePerYearChart"
 
+import AverageChartOverYears from "./Charts/AverageChartOverYears"
 
 
 export default function Main2() {
@@ -27,16 +28,16 @@ console.log(average_month_price.percentage_change)
       
 
   <div  className="flex p-2 ">
-  <div className="p-5 mr-5 pr-5">
-          <h4 style={{fontWeight:"light", fontSize:15}}>Current Month Price</h4>
+  <div className="">
+          <h4 style={{fontWeight:"light", fontSize:15, marginLeft:30}}>Current Month Price</h4>
 
-          <ul class="flex space-x-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+          <ul class="flex space-x-2 text-sm font-medium text-center ml-20 text-gray-500 dark:text-gray-400">
       <li class="me-2">
-      <h3 style={{color:"black", fontSize:25}} className="flex font-bold text-lg pt-1 text-black">₦{average_month_price.current_month_price}</h3>
+      <h3 style={{color:"black", marginLeft:30, fontSize:25}} className="flex font-bold text-lg pt-1 text-black">₦{average_month_price.current_month_price}</h3>
 
       </li>
       <li class="me-2 mt-1">
-      <span class="inline-flex bg-green-100 text-green-800  text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">{average_month_price.percentage_change}% <img src="/icons/increase.png" alt="" />  </span>
+      <span class="inline-flex bg-green-100 text-green-800  text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">{average_month_price.percentage_change}% <img src="/icons/increase.png" style={{height:20}} alt="" />  </span>
       </li>
     
   
@@ -82,9 +83,7 @@ console.log(average_month_price.percentage_change)
   
   </div>
   
-         
-  
-  
+
      </div>
      <div class=" bg-gray-50 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 p-10">
     <div class=" p-4">
@@ -93,8 +92,12 @@ console.log(average_month_price.percentage_change)
     <div class=" p-4">
         <AveragePerYearChart/>
     </div>
-</div>
+    <div style={{float:"right"}} class=" p-4">
+        <AverageChartOverYears/>
+    </div>
 
+  
+</div>
 
     </>
   )

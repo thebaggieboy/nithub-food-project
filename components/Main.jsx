@@ -12,7 +12,7 @@ export default function Main() {
       
 
   <div  className="flex p-2 ">
-  <div className="p-5 mr-5 pr-5">
+  <div className="p-10 mr-5 pr-5">
           <h4 style={{fontWeight:"light", fontSize:15}}>Current Daily Price</h4>
 
           <ul class="flex space-x-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400">
