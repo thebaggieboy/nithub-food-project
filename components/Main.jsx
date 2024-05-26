@@ -2,6 +2,9 @@ import React from 'react'
 
 import ChartOne from "./Charts/ChartOne"
 import AreaChart from "./Charts/AreaChart"
+import AveragePerYearChart from "./Charts/AveragePerYearChart"
+
+import AverageChartOverYears from "./Charts/AverageChartOverYears"
 
 export default function Main() {
   return (
@@ -13,12 +16,11 @@ export default function Main() {
 
   <div  className="flex p-2 ">
   <div className="p-10 mr-5 pr-5">
-          <h4 style={{fontWeight:"light", fontSize:15}}>Current Daily Price</h4>
+  <h4 style={{fontWeight:"light", fontSize:15, marginLeft:30}}>Current Daily Price</h4>
 
           <ul class="flex space-x-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400">
       <li class="me-2">
-      <h3 style={{color:"black", fontSize:25}} className="flex font-bold text-lg pt-1 text-black">$240.8k</h3>
-
+      <h3 style={{color:"black", marginLeft:30, fontSize:25}} className="flex font-bold text-lg pt-1 text-black">₦25000</h3>
       </li>
       <li class="me-2 mt-1">
       <span class="inline-flex bg-green-100 text-green-800  text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">14.8%</span>
@@ -48,8 +50,14 @@ export default function Main() {
     <div class=" p-4">
         <AreaChart/>
     </div>
-   <ChartOne/>
-  
+    <div class="p-4">
+    <AveragePerYearChart/>
+    
+    </div>
+    <div class="p-4">
+    <AverageChartOverYears/>
+    
+    </div>
 </div>
 
 
