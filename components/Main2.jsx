@@ -1,25 +1,48 @@
-import React from 'react'
-
-
 import AreaChart from "./Charts/AreaChart"
 
 import Date from "./DatePicker"
 import { Dropdown } from "flowbite-react";
 import Link from 'next/link'
-
+import { useDispatch, useSelector } from "react-redux";
 import AveragePerYearChart from "./Charts/AveragePerYearChart"
 
 import AverageChartOverYears from "./Charts/AverageChartOverYears"
+import { useState, Fragment, useEffect } from 'react'
 
+import {setItem, selectItem, selectItemType} from "../state/food_item/itemSlice"
 
 export default function Main2() {
-  const average_month_price = {
-    "current_month_price": 2501.99,
-    "month": "5",
-    "percentage_change": 9.24,
-    "previous_month_price": 2290.29
+  
+  const [foodData, setFoodData] = useState([])
+
+  const item = useSelector(selectItem)
+  const dispatch = useDispatch()
+
+    async function fetch_average_month_price(url){
+      console.log("Fetching average month price")
+      const res = await fetch(url, {
+        method: "GET",
+        headers: {
+
+            "Content-Type": "application/json",
+        },
+    })
+    const data = await res.json()
+    
+  
+    if (res.status >= 200 & res.status <= 209) {
+      
+        console.log("fetch successful")
+        setFoodData(data)
+       
+        console.log("fetch_average_month_price: ", foodData)
+      
 }
-console.log(average_month_price.percentage_change)
+    }
+  
+  fetch_average_month_price('https://food-price-dashboard-be.onrender.com/nbs/mom-percentage/?food_item=oil&item_type=vegetable&category=1000%20ml&year=2024')
+
+
   return (
     <>
      <div className="bg-gray-50  p-10">
@@ -33,11 +56,11 @@ console.log(average_month_price.percentage_change)
 
           <ul class="flex space-x-2 text-sm font-medium text-center ml-20 text-gray-500 dark:text-gray-400">
       <li class="me-2">
-      <h3 style={{color:"black", marginLeft:30, fontSize:25}} className="flex font-bold text-lg pt-1 text-black">₦{average_month_price.current_month_price}</h3>
+      <h3 style={{color:"black", marginLeft:30, fontSize:25}} className="flex font-bold text-lg pt-1 text-black">₦{foodData?.current_month_price}</h3>
 
       </li>
       <li class="me-2 mt-1">
-      <span class="inline-flex bg-green-100 text-green-800  text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">{average_month_price.percentage_change}% <img src="/icons/increase.png" style={{height:10, marginLeft:5}} alt="" />  </span>
+      <span class="inline-flex bg-green-100 text-green-800  text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">{foodData?.percentage_change}% <img src="/icons/increase.png" style={{height:10, marginLeft:5}} alt="" />  </span>
       </li>
     
   

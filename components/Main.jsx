@@ -1,12 +1,48 @@
-import React from 'react'
+import { useState, Fragment, useEffect } from 'react'
 
 import ChartOne from "./Charts/ChartOne"
 import AreaChart from "./Charts/AreaChart"
+import DailyAreaChart from "./Charts/DailyAreaChart"
 import AveragePerYearChart from "./Charts/AveragePerYearChart"
 
 import AverageChartOverYears from "./Charts/AverageChartOverYears"
 
+import { useDispatch, useSelector } from "react-redux";
+import {setItem, selectItem, selectItemType} from "../state/food_item/itemSlice"
+
+
+
 export default function Main() {
+      
+  const [foodData, setFoodData] = useState([])
+
+  const item = useSelector(selectItem)
+  const dispatch = useDispatch()
+
+    async function fetch_average_daily_price(url){
+        console.log("Fetching average daily price")
+        const res = await fetch(url, {
+          method: "GET",
+          headers: {
+  
+              "Content-Type": "application/json",
+          },
+      })
+      const data = await res.json()
+      
+    
+      if (res.status >= 200 & res.status <= 209) {
+        
+          console.log("fetch successful")
+          setFoodData(data)
+         
+          console.log("fetch_average_daily_price: ", foodData)
+        
+  }
+      }
+    
+    fetch_average_daily_price('https://food-price-dashboard-be.onrender.com/supermarkets/dod-percentage/?food_item=oil&item_type=vegetable&category=1000%20ml&year=2024')
+  
   return (
     <>
      <div className="bg-gray-50  p-10">
@@ -20,10 +56,10 @@ export default function Main() {
 
           <ul class="flex space-x-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400">
       <li class="me-2">
-      <h3 style={{color:"black", marginLeft:30, fontSize:25}} className="flex font-bold text-lg pt-1 text-black">₦25000</h3>
+      <h3 style={{color:"black", marginLeft:30, fontSize:25}} className="flex font-bold text-lg pt-1 text-black">₦{foodData?.current_day_average_price}</h3>
       </li>
       <li class="me-2 mt-1">
-      <span class="inline-flex bg-green-100 text-green-800  text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">14.8%</span>
+      <span class="inline-flex bg-green-100 text-green-800  text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">{foodData?.percentage_change}%</span>
       </li>
     
   
@@ -48,7 +84,7 @@ export default function Main() {
      </div>
      <div class=" bg-gray-50 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 p-10">
     <div class=" p-4">
-        <AreaChart/>
+        <DailyAreaChart/>
     </div>
     <div class="p-4">
     <AveragePerYearChart/>
