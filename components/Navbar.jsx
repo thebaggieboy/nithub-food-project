@@ -27,6 +27,7 @@ import { Dropdown } from "flowbite-react";
 
 import { Button, Popover } from "flowbite-react";
 
+import { useSearchParams } from 'next/navigation'
 
 const navigation = [
   { name: 'Food Item', href: '/' },
@@ -50,6 +51,14 @@ const content = (
 
 
 export default function NavBar() {
+  
+  
+  const router = useRouter()
+  const path_ = router.pathname
+  const searchParams = useSearchParams();
+  const dashboard_query = searchParams.get('dashboard')
+  console.log("The current path for this route is ", path_)
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [resultReady, setResultReady] = useState(true)
   const [options, setOptions] = useState([]);
@@ -105,10 +114,6 @@ export default function NavBar() {
   }
 
 
-  const router = useRouter()
-  const path = router.pathname
-  
-  console.log("The current path for this route is ", path)
   return (
     <>
 
@@ -135,12 +140,13 @@ export default function NavBar() {
             </button>
           </div>
           <div style={{textAlign:"center",  maxWidth:"fit-content", marginInline:"auto"}} className="hidden lg:flex lg:gap-x-12 bold">
-           <h2 style={{fontWeight:'bold', textAlign:"center", maxWidth:"fit-content", marginInline:"auto"}}>NAIJA FOOD PRICE PROJECT</h2>
+          {dashboard_query == null  ? "" : <h2 style={{fontWeight:'bold', textAlign:"center", maxWidth:"fit-content", marginInline:"auto"}}>NAIJA FOOD PRICE PROJECT</h2>}
+
+
           </div>
           <div  className="ml-10 hidden lg:flex lg:gap-x-12 overflow-x-visible">
-         
-         
-<div  style={{borderRadius:50, border:"1px green solid", padding:10, width:100, fontSize:10, fontWeight:'lighter', color:"black", fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:10}}  className=" hover:text-white   hover:bg-green-800 ml-3">
+
+      {dashboard_query == null  ? "" : <div  style={{borderRadius:50, border:"1px green solid", padding:10, width:100, fontSize:10, fontWeight:'lighter', color:"black", fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:10}}  className=" hover:text-white   hover:bg-green-800 ml-3">
 <Dropdown inline label="Food Item">
 
 {result.map(item=>(
@@ -155,7 +161,11 @@ export default function NavBar() {
   </Dropdown>
 
 </div>
-<div  style={{borderRadius:50, border:"1px green solid", padding:10, width:100, fontSize:10, fontWeight:'lighter', color:"black", fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:10}}  className=" hover:text-white   hover:bg-green-800 ml-3">
+}
+        
+         
+
+{dashboard_query == null  ? "" : <div  style={{borderRadius:50, border:"1px green solid", padding:10, width:100, fontSize:10, fontWeight:'lighter', color:"black", fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:10}}  className=" hover:text-white   hover:bg-green-800 ml-3">
 <Dropdown inline label="Item Type" >
 {resultItemType.map(item=>(
   <>
@@ -168,8 +178,13 @@ export default function NavBar() {
   
 </Dropdown>
 
-</div>
-<div  style={{borderRadius:50, border:"1px green solid", padding:10, width:100, fontSize:10, fontWeight:'lighter', color:"black", fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:10}}  className=" hover:text-white   hover:bg-green-800 ml-3">
+</div>}
+
+
+
+
+
+{dashboard_query == null  ? "" : <div  style={{borderRadius:50, border:"1px green solid", padding:10, width:100, fontSize:10, fontWeight:'lighter', color:"black", fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:10}}  className=" hover:text-white   hover:bg-green-800 ml-3">
 <Dropdown inline label="Category" >
   <Dropdown.Item>
     Food Item 1
@@ -181,7 +196,10 @@ export default function NavBar() {
 </Dropdown>
 
 </div>
-          </div>
+      }
+
+
+    </div>
        
           
 

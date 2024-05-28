@@ -34,7 +34,7 @@ export default function Layout({children}) {
 <div className={dashboard_query !== "Daily" || dashboard_query !== "Monthly" ? 'bg-white' : "bg-gray-50"} >
         
 <NavBar/>  
-{dashboard_query == null || dashboard_query == null ? <LandingPage/> : ""}
+{dashboard_query == null  ? <LandingPage/> : ""}
 
 
 {dashboard_query == "Daily" || dashboard_query == "Monthly" ? <div className="p-10 ml-5">
