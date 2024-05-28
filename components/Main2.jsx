@@ -58,11 +58,11 @@ export default function Main2() {
 
           <ul class="flex space-x-2 text-sm font-medium text-center ml-20 text-gray-500 dark:text-gray-400">
       <li class="me-2">
-      <h3 style={{color:"black", marginLeft:30, fontSize:25}} className="flex font-bold text-lg pt-1 text-black">₦{foodData?.current_month_price}</h3>
+      <h3 style={{color:"black", marginLeft:30, fontSize:25}} className="flex font-bold text-lg pt-1 text-black">₦{item?.current_month_price}</h3>
 
       </li>
       <li class="me-2 mt-1">
-      <span class="inline-flex bg-green-100 text-green-800  text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">{foodData?.percentage_change}% <img src="/icons/increase.png" style={{height:10, marginLeft:5}} alt="" />  </span>
+      <span class="inline-flex bg-green-100 text-green-800  text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">{item?.percentage_change}% <img src="/icons/increase.png" style={{height:10, marginLeft:5}} alt="" />  </span>
       </li>
     
   
