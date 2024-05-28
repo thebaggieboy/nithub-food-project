@@ -1,4 +1,4 @@
-import { AreaChart, EventProps } from '@tremor/react';
+import { AreaChart, EventProps, LineChart } from '@tremor/react';
 import { useState, Fragment, useEffect } from 'react'
 
 
@@ -22,12 +22,12 @@ export default function AreaChartHero() {
       })
       const data = await res.json()
     
-  
+      setFoodData(data)
     
       if (res.status >= 200 & res.status <= 209) {
         
           console.log("fetch successful")
-          setFoodData(data)
+         
           console.log("Food Data: ", foodData)
      
   }
@@ -46,7 +46,7 @@ export default function AreaChartHero() {
         yAxisWidth={65}
         onValueChange={(v) => setValue(v)}
         connectNulls={true}
-        xAxisLabel="Date Of Day"
+     
       />
      </div>
 
