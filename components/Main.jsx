@@ -70,7 +70,7 @@ export default function Main() {
       </div>
   
      
-  <ul class="flex flex-nowrap space-x-1 pt-4  mt-1 ml-2 pl-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+  <ul class="flex flex-nowrap gap-2 space-x-1 pt-4  mt-1 ml-2 pl-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400">
       <li class="me-2">
           <a href="#" style={{borderRadius:50, fontSize:10}} class="inline-block px-4 py-1 text-green-900 bold text-xs bg-green-200 rounded-lg active" aria-current="page">Daily</a>
       </li>
