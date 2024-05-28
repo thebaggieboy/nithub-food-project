@@ -70,7 +70,7 @@ export default function Main2() {
       </div>
   
      
-  <ul class="flex flex-nowrap space-x-1 pt-4  mt-2 ml-2 pl-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+  <ul class="flex flex-wrap  space-x-1 pt-4  mt-2 ml-2 pl-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400">
       <li class="me-2 mt-2">
       <span class="bg-green-800 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"></span> <span class="text-xs" style={{fontSize:10}}> Current Year</span>
       </li>
