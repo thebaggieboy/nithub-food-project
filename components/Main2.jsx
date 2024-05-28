@@ -68,7 +68,7 @@ export default function Main2() {
       </div>
   
      
-  <ul class="flex flex-nowrap space-x-1 pt-4  mt-2 ml-10 pl-10 text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+  <ul class="flex flex-nowrap space-x-1 pt-4  mt-2 ml-2 pl-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400">
       <li class="me-2 mt-2">
       <span class="bg-green-800 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"></span> <span class="text-xs" style={{fontSize:10}}> Current Year</span>
       </li>
@@ -76,8 +76,8 @@ export default function Main2() {
       <span class="bg-green-400 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"></span> <span class="text-xs" style={{fontSize:10}}> Previous Year</span>
       </li>
       <li class="me-2">
-      <div className="p-10 ml-5" style={{fontSize:8}}>
-<Dropdown className="text-xs" dismissOnClick={true} label="2024" style={{backgroundColor:"white",textAlign:"center", color:"black", border:"0.5px solid green",  maxWidth:"fit-content", marginInline:"auto" }}>
+      <div className="p-10 ml-2 pt-2" style={{fontSize:8}}>
+<Dropdown className="text-xs" dismissOnClick={true} label="2024" style={{backgroundColor:"white",textAlign:"center", fontSize:8,  color:"black", border:"0.5px solid green",  maxWidth:"fit-content", marginInline:"auto", height:30, width:70, alignItems:"center" }}>
       <Dropdown.Item as={Link} href="?dashboard=Daily">
         2023
       </Dropdown.Item>

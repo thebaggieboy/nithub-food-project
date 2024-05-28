@@ -32,7 +32,12 @@ export default function AreaChartHero() {
      
   }
   }
-  fetchFoodData('https://food-price-dashboard-be.onrender.com/supermarkets/year/?food_item=oil&item_type=vegetable&category=1000%20ml&year=2024')
+
+  useEffect(() => {
+
+    fetchFoodData('https://food-price-dashboard-be.onrender.com/supermarkets/all-time/?food_item=oil&item_type=vegetable&category=1000%20ml&year=2024')
+
+  }, [])
 
   return (
   <>
