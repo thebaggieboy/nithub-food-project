@@ -30,12 +30,12 @@ export default function Main() {
           },
       })
       const data = await res.json()
-      
+      setFoodData(data)
     
       if (res.status >= 200 & res.status <= 209) {
         
           console.log("fetch successful")
-          setFoodData(data)
+          
          
           console.log("fetch_average_daily_price: ", foodData)
         

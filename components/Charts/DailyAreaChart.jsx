@@ -42,7 +42,7 @@ export default function AreaChartHero() {
   return (
   <>
      <div className="p-10">
-     <BarChart
+     <AreaChart
         className="mt-4 p-10 h-72"
         data={foodData.data}
         index="date"
