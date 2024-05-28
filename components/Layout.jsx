@@ -45,7 +45,7 @@ export default function Layout({children}) {
       <Dropdown.Item as={Link} href="?dashboard=Monthly">
         Monthly
       </Dropdown.Item>
-    </Dropdown>
+    </Dropdown> <br />
 
 </div> : ""}        
 </div>
