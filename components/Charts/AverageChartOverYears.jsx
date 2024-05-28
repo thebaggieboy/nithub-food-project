@@ -30,10 +30,9 @@ export default function AverageChartOverYears() {
     
       if (res.status >= 200 & res.status <= 209) {
         
-          console.log("average-item-types-price successful")
+       
           setFoodData(data)
-          console.log("Average Over Years Food Data: ", foodData)
-     
+        
   }
   }
   fetchFoodData('https://food-price-dashboard-be.onrender.com/nbs/average-item-types-price/?food_item=oil&item_type=vegetable&category=1000%20ml&year=2024')

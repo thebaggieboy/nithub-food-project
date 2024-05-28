@@ -31,7 +31,7 @@ export default function AreaChartHero() {
   
     if (res.status >= 200 & res.status <= 209) {
       
-        console.log("fetch successful")
+       
         setFoodData(data)
         console.log("Food Data: ", foodData)
    

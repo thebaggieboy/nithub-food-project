@@ -33,10 +33,10 @@ export default function Main2() {
   
     if (res.status >= 200 & res.status <= 209) {
       
-        console.log("fetch successful")
+      
         setFoodData(data)
-       
-        console.log("fetch_average_month_price: ", foodData)
+        dispatch(setItem(foodData))
+      
       
 }
     }
@@ -44,7 +44,7 @@ export default function Main2() {
   fetch_average_month_price('https://food-price-dashboard-be.onrender.com/nbs/mom-percentage/?food_item=oil&item_type=vegetable&category=1000%20ml&year=2024')
 
 
-  })
+  }, [foodData])
   return (
     <>
      <div className="bg-gray-50  p-10">
@@ -70,7 +70,7 @@ export default function Main2() {
       </div>
   
      
-  <ul class="flex flex-wrap  space-x-1 pt-4  mt-2 ml-2 pl-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+  <ul class="flex flex-wrap gap-2  space-x-1 pt-4  mt-2 ml-2 pl-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400">
       <li class="me-2 mt-2">
       <span class="bg-green-800 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"></span> <span class="text-xs" style={{fontSize:10}}> Current Year</span>
       </li>
