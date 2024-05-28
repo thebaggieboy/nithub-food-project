@@ -1,7 +1,6 @@
 import { useState, Fragment, useEffect, use } from 'react'
 
-import ChartOne from "./Charts/ChartOne"
-import AreaChart from "./Charts/AreaChart"
+
 import DailyAreaChart from "./Charts/DailyAreaChart"
 import AveragePerYearChart from "./Charts/AveragePerYearChart"
 
