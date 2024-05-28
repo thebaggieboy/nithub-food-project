@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AveragePerYearChart from "./Charts/AveragePerYearChart"
 
 import AverageChartOverYears from "./Charts/AverageChartOverYears"
-import { useState, Fragment, useEffect } from 'react'
+import { useState, Fragment, useEffect, use } from 'react'
 
 import {setItem, selectItem, selectItemType} from "../state/food_item/itemSlice"
 
@@ -18,6 +18,7 @@ export default function Main2() {
   const item = useSelector(selectItem)
   const dispatch = useDispatch()
 
+  useEffect(() => {
     async function fetch_average_month_price(url){
       console.log("Fetching average month price")
       const res = await fetch(url, {
@@ -43,6 +44,7 @@ export default function Main2() {
   fetch_average_month_price('https://food-price-dashboard-be.onrender.com/nbs/mom-percentage/?food_item=oil&item_type=vegetable&category=1000%20ml&year=2024')
 
 
+  })
   return (
     <>
      <div className="bg-gray-50  p-10">

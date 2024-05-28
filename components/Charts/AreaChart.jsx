@@ -14,30 +14,32 @@ export default function AreaChartHero() {
     const [value, setValue] = useState(null);
     const [foodData, setFoodData] = useState([])
      
-    async function fetchFoodData(url){
+ useEffect(() => {
+  async function fetchFoodData(url){
 
-      console.log("fetching food data")
-      const res = await fetch(url, {
-          method: "GET",
-          headers: {
-  
-              "Content-Type": "application/json",
-          },
-      })
-      const data = await res.json()
-    
-  
-    
-      if (res.status >= 200 & res.status <= 209) {
-        
-          console.log("fetch successful")
-          setFoodData(data)
-          console.log("Food Data: ", foodData)
-     
-  }
-  }
-  fetchFoodData('https://food-price-dashboard-be.onrender.com/nbs/year/?food_item=oil&item_type=vegetable&category=1000%20ml&year=2024')
+    console.log("fetching food data")
+    const res = await fetch(url, {
+        method: "GET",
+        headers: {
 
+            "Content-Type": "application/json",
+        },
+    })
+    const data = await res.json()
+  
+
+  
+    if (res.status >= 200 & res.status <= 209) {
+      
+        console.log("fetch successful")
+        setFoodData(data)
+        console.log("Food Data: ", foodData)
+   
+}
+}
+fetchFoodData('https://food-price-dashboard-be.onrender.com/nbs/year/?food_item=oil&item_type=vegetable&category=1000%20ml&year=2024')
+
+ })
   return (
   <>
      <div className="p-10">

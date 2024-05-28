@@ -1,4 +1,4 @@
-import { useState, Fragment, useEffect } from 'react'
+import { useState, Fragment, useEffect, use } from 'react'
 
 import ChartOne from "./Charts/ChartOne"
 import AreaChart from "./Charts/AreaChart"
@@ -19,6 +19,7 @@ export default function Main() {
   const item = useSelector(selectItem)
   const dispatch = useDispatch()
 
+  useEffect(() => {
     async function fetch_average_daily_price(url){
         console.log("Fetching average daily price")
         const res = await fetch(url, {
@@ -43,6 +44,7 @@ export default function Main() {
     
     fetch_average_daily_price('https://food-price-dashboard-be.onrender.com/supermarkets/dod-percentage/?food_item=oil&item_type=vegetable&category=1000%20ml&year=2024')
   
+  })
   return (
     <>
      <div className="bg-gray-50  p-10">

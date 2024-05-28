@@ -1,4 +1,4 @@
-import { AreaChart, EventProps, LineChart } from '@tremor/react';
+import { AreaChart, EventProps, LineChart, BarChart } from '@tremor/react';
 import { useState, Fragment, useEffect } from 'react'
 
 
@@ -10,31 +10,31 @@ export default function AreaChartHero() {
     const [value, setValue] = useState(null);
     const [foodData, setFoodData] = useState([])
      
+    
+  useEffect(() => {
     async function fetchFoodData(url){
 
-      console.log("fetching food data")
-      const res = await fetch(url, {
-          method: "GET",
-          headers: {
+        console.log("fetching food data")
+        const res = await fetch(url, {
+            method: "GET",
+            headers: {
+    
+                "Content-Type": "application/json",
+            },
+        })
+        const data = await res.json()
+      
+        setFoodData(data)
+      
+        if (res.status >= 200 & res.status <= 209) {
+          
+            console.log("fetch successful")
+           
+            console.log("Food Data: ", foodData)
+       
+    }
+    }
   
-              "Content-Type": "application/json",
-          },
-      })
-      const data = await res.json()
-    
-      setFoodData(data)
-    
-      if (res.status >= 200 & res.status <= 209) {
-        
-          console.log("fetch successful")
-         
-          console.log("Food Data: ", foodData)
-     
-  }
-  }
-
-  useEffect(() => {
-
     fetchFoodData('https://food-price-dashboard-be.onrender.com/supermarkets/all-time/?food_item=oil&item_type=vegetable&category=1000%20ml&year=2024')
 
   }, [])
@@ -42,7 +42,7 @@ export default function AreaChartHero() {
   return (
   <>
      <div className="p-10">
-     <AreaChart
+     <BarChart
         className="mt-4 p-10 h-72"
         data={foodData.data}
         index="date"
