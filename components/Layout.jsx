@@ -8,7 +8,7 @@ import NavBar from './Navbar'
 import Script from "next/script" 
 import { Dropdown } from "flowbite-react";
 
-
+import LandingPage from "./LandingPage"
 
 
 import Main from './Main'
@@ -31,11 +31,13 @@ export default function Layout({children}) {
  
     return (
       <>
-<div className='bg-gray-50'>
+<div className={dashboard_query !== "Daily" || dashboard_query !== "Monthly" ? 'bg-white' : "bg-gray-50"} >
         
 <NavBar/>  
-      
-<div className="p-10 ml-5">
+{dashboard_query == null || dashboard_query == null ? <LandingPage/> : ""}
+
+
+{dashboard_query == "Daily" || dashboard_query == "Monthly" ? <div className="p-10 ml-5">
 <Dropdown className=" ml-5" dismissOnClick={true} label="Dashboard Type" style={{backgroundColor:"white", marginLeft:10,textAlign:"center", color:"black", border:"1px solid green", fontSize:10, maxWidth:"fit-content", marginInline:"auto" }}>
       <Dropdown.Item as={Link} href="?dashboard=Daily">
         Daily
@@ -45,14 +47,14 @@ export default function Layout({children}) {
       </Dropdown.Item>
     </Dropdown>
 
+</div> : ""}        
 </div>
 
-   
-</div>
 
+{dashboard_query === "Daily" ? <Main/> : ""}
+{dashboard_query === "Monthly" ? <Main2/> : ""}
 
-{dashboard_query =="Daily" ? <Main/> : <Main2/>}
-
+ 
  
          {children}
      
