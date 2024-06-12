@@ -28,6 +28,10 @@ import { Dropdown } from "flowbite-react";
 import { Button, Popover } from "flowbite-react";
 
 import { useSearchParams } from 'next/navigation'
+import itemSlice, { selectItem, setItem } from '@/state/food_item/itemSlice'
+import itemTypeSlice, { selectItemType, setItemType } from '@/state/item_types/itemTypeSlice'
+import {useDispatch,  useSelector } from 'react-redux'
+
 
 const navigation = [
   { name: 'Food Item', href: '/' },
@@ -50,9 +54,11 @@ const content = (
 
 
 
+
 export default function NavBar() {
-  
-  
+  const dispatch = useDispatch();
+  const food_item = useSelector(selectItem)
+  const item_type = useSelector(selectItemType)
   const router = useRouter()
   const path_ = router.pathname
   const searchParams = useSearchParams();
@@ -63,77 +69,172 @@ export default function NavBar() {
   const [resultReady, setResultReady] = useState(true)
   const [options, setOptions] = useState([]);
   const [error, setError] = useState(null);
-  const [result, setResult] = useState([]); 
+  const [result, setResult] = useState([]);
+  const [categoryResult, setCategoryResult] = useState([]); 
   const [currentItems, setCurrentItems] = useState([]); 
   const [resultItemType, setResultItemType] = useState([]); 
-  const [activeItem, setActiveItem] = useState('');
+  const [filteredItems, setFilteredItems] = useState([]);
+  const [selectedValue, setSelectedValue] = useState('');
+  const [selectedItemValue, setSelectedItemValue] = useState('');
+  const [selectedCategoryValue, setSelectedCategoryValue] = useState('');
+
+  const [selectedItemType, setSelectedItemType] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [subOptions, setSubOptions] = useState([]);
+  const [quantities, setQuantities] = useState([]);
+
+  const [quantity, setQuantity] = useState(null);
+  const [selectedParentKey, setSelectedParentKey] = useState('');
+  const [selectedChildKey, setSelectedChildKey] = useState('');
+
   var results=[];
-  var itemResults = []
-  var currentItemResults = []
+  var item_types_result = [];
+  var category_result = []
 
-
-
-  useEffect(() => {
-   
-  
-      console.log("NBS_DASHBOARD: ", NBS_DASHBOARD[0]);
-
-      setResultReady(true)
-  
-      var json = NBS_DASHBOARD
+  console.log("NBS_DASHBOARD: ", NBS_DASHBOARD[0]);
+  const data =  {
+    "beans": {
+      "brown": {"id": 1, "quantity": ["1000 g"]},
+      "white black eye": {"id": 2, "quantity": ["1000 g"]}
+    },
     
-    for (let key in json[0]) {
-    
+    "beef": {
+      "bone in": {"id": 3, "quantity": ["1000 g"]},
+      "boneless": {"id": 4, "quantity": ["1000 g"]}
+    },
+    "bread": {
+      "sliced": {"id": 5, "quantity": ["1 loaf"]},
+      "unsliced": {"id": 6, "quantity": ["1 loaf"]}
+    },
+    "chicken": {
+      "feet": {"id": 7, "quantity": ["1000 g"]},
+      "frozen": {"id": 8, "quantity": ["1 unit"]},
+      "wings": {"id": 9, "quantity": ["1000 g"]}
+    },
+    "eggs": {
+      "agric": {"id": 10, "quantity": ["12 pcs", "1 pcs"]}
+    },
+    "fish": {
+      "catfish smoked": {"id": 11, "quantity": ["1000 g"]},
+      "fish": {"id": 12, "quantity": ["1000 g"]}
+    },
+    "garri": {
+      "white": {"id": 13, "quantity": ["1000 g"]},
+      "yellow": {"id": 14, "quantity": ["1000 g"]}
+    },
+    "milk": {
+      "evaporated tin": {"id": 15, "quantity": ["1 unit"]}
+    },
+    "oil": {
+      "groundnut": {"id": 16, "quantity": ["1000 ml"]},
+      "palm": {"id": 17, "quantity": ["1000 ml"]},
+      "vegetable": {"id": 18, "quantity": ["1000 ml"]}
+    },
+    "potato": {
+      "irish": {"id": 19, "quantity": ["1000 g"]},
+      "sweet": {"id": 20, "quantity": ["1000 g"]}
+    },
+    "rice": {
+      "imported": {"id": 21, "quantity": ["1000 g"]},
+      "local": {"id": 22, "quantity": ["1000 g"]},
+      "ofada": {"id": 23, "quantity": ["1000 g"]} 
+    },
+    "tomato": {
+      "tomato": {"id": 24, "quantity": ["1000 g"]}
+    },
+    "yam": {
+      "tuber": {"id": 25, "quantity": ["1000 g"]}
+    }
+  }
   
+  function getQuantities(foodType) {
+    const foodData = data[foodType];
+    
+    if (!foodData) {
+      return []; // Return an empty array if the food type is not found
+    }
+    
+    const quantities = Object.values(foodData).map(item => item.quantity).flat();
+    
+    return quantities;
+  }
+  
+  
+
+  useEffect(() => { 
+     var json = NBS_DASHBOARD  
+     setCategoryResult(quantities_result);
+    
+     for (let key in json[0]) {
       var json_type = NBS_DASHBOARD[0][key]
-      console.log("Item  Key: ", key)
-     
-   
-  
-      console.log("json_type : ", json_type)
     
       results.push(key)
       setResult(results)
-      itemResults.push(json_type)
-      setResultItemType(itemResults)
-   
-    
     }
- 
-    
-  
-
   }, [])
 
-  console.log("Item Types: ", itemResults)
-    
 
-  async function setItemToDropDown(){
-    console.log("Food item clicked")
-
-for (let i = 0; i < resultItemType.length; i++) {
-  const element = resultItemType[i];
-  console.log("Element: ", element)
-
-  currentItemResults.push(element)  
-  setCurrentItems(currentItemResults)
-  
-}
-
-    console.log("Current Items; ", currentItemResults)
-     
-  }
-
-  async function setItemToDropDown2(){
-    console.log("Food item clicked 2")
-
-    
-
-  }
+ 
+ 
   if (error) {
     return <div>Error: {error}</div>;
   }
 
+  
+
+
+const handleChange = (event) => {
+  setSelectedValue(event.target.value);
+  const category = event.target.value;
+  setSelectedCategory(category);
+  // Destructure the data to get sub-options
+  if (data[category]) {
+    const options = Object.keys(data[category]);
+    const quantity = Object.keys(data[category]);
+    console.log("quantity: ", quantity)
+    setSubOptions(options);
+  } else {
+    setSubOptions([]);
+  }
+
+  dispatch(setItem(selectedValue))
+
+  const filteredData = Object.keys(NBS_DASHBOARD[0])
+  .filter((key) => key.includes(selectedValue.toLowerCase()))
+  .reduce((result, key) => {
+    result[key] = NBS_DASHBOARD[0][key];
+    return result;
+    
+  }, {});
+  dispatch(setItemType(filteredData))
+  item_types_result.push(filteredData);
+  setSelectedItemType(item_types_result)
+ 
+
+};
+
+const quantities_result = getQuantities(selectedValue);
+  
+  
+const handleItemTypeChange = (event) => {
+  setSelectedItemValue(event.target.value);
+}
+
+const handleCategoryClick = (foodType,itemType) => {
+  
+  console.log("selectedItemTypeValue: ")
+};
+
+const api_url = ``
+function generate_url(url){
+  
+}
+
+
+console.log("selectedValue: ", selectedValue)
+console.log("selectedOptions: ", subOptions)
+
+console.log("quantities_result: ", quantities_result)
 
   return (
     <>
@@ -167,98 +268,49 @@ for (let i = 0; i < resultItemType.length; i++) {
           </div>
           <div  className="ml-10 hidden lg:flex lg:gap-x-12 overflow-x-visible">
 
-      {dashboard_query == null  ? "" : <div  style={{borderRadius:50, border:"1px green solid", padding:10, width:100, fontSize:10, fontWeight:'lighter', color:"black", fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:10}}  className=" hover:text-white   hover:bg-green-800 ml-3">
-<Dropdown inline label="Food Item">
+      {dashboard_query == null  ? "" :   <form class="max-w-sm mx-auto">
 
-{result.map(item=>(
-  <>
-   <Dropdown.Item onClick={setItemToDropDown}>
-   {item}
-</Dropdown.Item>
-
-  </>
+<select value={selectedValue} onChange={handleChange} id="food_item"  style={{borderRadius:50, border:"1px green solid", padding:5, width:100, fontSize:10, fontWeight:'lighter',  fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:10}}  className=" hover:text-white   hover:bg-green-800 ml-3">
+  <option value="food_item">Food Item</option>
+  {result.map(item=>(
+  <option value={item} >{item}</option>
 ))}
+</select>
 
-  </Dropdown>
 
-</div>
-}
+</form>  }
         
-{/* {<Dropdown inline label="Item Type 2" >
-  
-<Dropdown.Item name="Beans" >
-   <p  value="Beans" onClick={(e)=> console.log("Target: ", e.target.value)}>Beans</p>
-</Dropdown.Item> 
-<Dropdown.Item  >
-   <p>Beef</p>
-</Dropdown.Item> 
-<Dropdown.Item  >
-   <p>Bread</p>
-</Dropdown.Item> 
-<Dropdown.Item  >
-   <p>Chicken</p>
-</Dropdown.Item>
- <Dropdown.Item  >
-   <p>Eggs</p>
-</Dropdown.Item> 
-<Dropdown.Item  >
-   <p>Fish</p>
-</Dropdown.Item> 
-<Dropdown.Item  >
-   <p>Garri</p>
-</Dropdown.Item> 
-<Dropdown.Item  >
-   <p>Milk</p>
-</Dropdown.Item> 
-<Dropdown.Item  >
-   <p>Oil</p>
-</Dropdown.Item> 
-<Dropdown.Item  >
-   <p>Potato</p>
-</Dropdown.Item> 
-<Dropdown.Item  >
-   <p>Rice</p>
-</Dropdown.Item> 
-<Dropdown.Item  >
-   <p>Tomato</p>
-</Dropdown.Item> 
-<Dropdown.Item  >
-   <p>Yam</p>
-</Dropdown.Item> 
- </Dropdown> } */}
 
-{dashboard_query == null  ? "" : <div  style={{borderRadius:50, border:"1px green solid", padding:10, width:100, fontSize:10, fontWeight:'lighter', color:"black", fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:10}}  className=" hover:text-white   hover:bg-green-800 ml-3">
-<Dropdown inline label="Item Type" >
-{currentItemResults.map(item=>(
-  <>
-   <Dropdown.Item style={{color:"black"}}>
-      {item}
-</Dropdown.Item>
+{dashboard_query == null  ? "" :   <form class="max-w-sm mx-auto">
 
-  </>
-))}
-  
-</Dropdown>
+<select value={selectedItemValue}  onChange={handleItemTypeChange} id="item_type"  style={{borderRadius:50, border:"1px green solid", padding:5, width:100, fontSize:10, fontWeight:'lighter',  fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:10}}  className=" hover:text-white   hover:bg-green-800 ml-3">
 
-</div>}
+
+<option value="item_type">Item Type</option>
+{ subOptions.map(item=>(
+  <option  value={item} >{item}</option>
+))}   
+</select>
+
+
+</form>  }
+        
+
+
+{dashboard_query == null  ? "" :   <form class="max-w-sm mx-auto">
+
+<select value={selectedCategoryValue}  onChange={handleCategoryClick} id="item_type"  style={{borderRadius:50, border:"1px green solid", padding:5, width:100, fontSize:10, fontWeight:'lighter',  fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:10}}  className=" hover:text-white   hover:bg-green-800 ml-3">
 
 
 
+{quantities_result.length < 1 ?   <option  value='item_type' >Category</option>: quantities_result.map(item=>(
+  <option  value={item} >{item}</option>
+))}   
+</select>
 
 
-{dashboard_query == null  ? "" : <div  style={{borderRadius:50, border:"1px green solid", padding:10, width:100, fontSize:10, fontWeight:'lighter', color:"black", fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:10}}  className=" hover:text-white   hover:bg-green-800 ml-3">
-<Dropdown inline label="Category" >
-  <Dropdown.Item>
-    Food Item 1
-  </Dropdown.Item>
-  <Dropdown.Item>
-    Food Item 2
-  </Dropdown.Item>
-  
-</Dropdown>
-
-</div>
-      }
+</form>  }
+        
 
 
     </div>
@@ -288,80 +340,23 @@ for (let i = 0; i < resultItemType.length; i++) {
               <div className="-my-6 divide-y divide-gray-500/10">
                 <div className="space-y-2 py-6">
                 
-      {dashboard_query == null  ? "" : <div  style={{borderRadius:50, border:"1px green solid", padding:10, width:100, fontSize:10, fontWeight:'lighter', color:"black", fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:10}}  className=" hover:text-white   hover:bg-green-800 ml-3">
-<Dropdown inline label="Food Item">
-
-{result.map(item=>(
-  <>
-   <Dropdown.Item onClick={setItemToDropDown}>
-   {item}
-</Dropdown.Item>
-
-  </>
+    
+<select value={selectedValue} onChange={handleChange} id="food_item"  style={{borderRadius:50, border:"1px green solid", padding:5, width:100, fontSize:10, fontWeight:'lighter',  fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:10}}  className=" hover:text-white   hover:bg-green-800 ml-3">
+  <option value="food_item">Food Item</option>
+  {result.map(item=>(
+  <option value={item} >{item}</option>
 ))}
+</select>
+<br />
 
-  </Dropdown>
+<select value={selectedItemValue}  onChange={handleItemTypeChange} id="item_type"  style={{borderRadius:50, border:"1px green solid", padding:5, width:100, fontSize:10, fontWeight:'lighter',  fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:10}}  className=" hover:text-white   hover:bg-green-800 ml-3">
 
-</div>
-}
-        
-{/* {<Dropdown inline label="Item Type 2" >
-  
-<Dropdown.Item name="Beans" >
-   <p  value="Beans" onClick={(e)=> console.log("Target: ", e.target.value)}>Beans</p>
-</Dropdown.Item> 
-<Dropdown.Item  >
-   <p>Beef</p>
-</Dropdown.Item> 
-<Dropdown.Item  >
-   <p>Bread</p>
-</Dropdown.Item> 
-<Dropdown.Item  >
-   <p>Chicken</p>
-</Dropdown.Item>
- <Dropdown.Item  >
-   <p>Eggs</p>
-</Dropdown.Item> 
-<Dropdown.Item  >
-   <p>Fish</p>
-</Dropdown.Item> 
-<Dropdown.Item  >
-   <p>Garri</p>
-</Dropdown.Item> 
-<Dropdown.Item  >
-   <p>Milk</p>
-</Dropdown.Item> 
-<Dropdown.Item  >
-   <p>Oil</p>
-</Dropdown.Item> 
-<Dropdown.Item  >
-   <p>Potato</p>
-</Dropdown.Item> 
-<Dropdown.Item  >
-   <p>Rice</p>
-</Dropdown.Item> 
-<Dropdown.Item  >
-   <p>Tomato</p>
-</Dropdown.Item> 
-<Dropdown.Item  >
-   <p>Yam</p>
-</Dropdown.Item> 
- </Dropdown> } */}
 
-{dashboard_query == null  ? "" : <div  style={{borderRadius:50, border:"1px green solid", padding:10, width:100, fontSize:10, fontWeight:'lighter', color:"black", fontFamily:"Poppins, sans-serif", textAlign:'center', paddingLeft:10}}  className=" hover:text-white   hover:bg-green-800 ml-3">
-<Dropdown inline label="Item Type" >
-{currentItemResults.map(item=>(
-  <>
-   <Dropdown.Item style={{color:"black"}}>
-      {item}
-</Dropdown.Item>
-
-  </>
-))}
-  
-</Dropdown>
-
-</div>}
+<option value="item_type">Item Type</option>
+{ subOptions.map(item=>(
+  <option  value={item} >{item}</option>
+))}   
+</select>
 
 
 

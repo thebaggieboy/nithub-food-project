@@ -22,7 +22,7 @@ export const { setItem, setItemType } = itemSlice.actions
 
 
 //selectors
+
 export const selectItem = mainState => mainState.item.item
-export const selectItemType = mainState => mainState.item.item?.item_type
 
 export default itemSlice.reducer    

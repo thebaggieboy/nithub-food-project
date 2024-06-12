@@ -1,0 +1,153 @@
+[
+    {
+      "category": "beans",
+      "subcategory": "brown",
+      "id": 1,
+      "quantity": ["1000 g"]
+    },
+    {
+      "category": "beans",
+      "subcategory": "white black eye",
+      "id": 2,
+      "quantity": ["1000 g"]
+    },
+    {
+      "category": "beef",
+      "subcategory": "bone in",
+      "id": 3,
+      "quantity": ["1000 g"]
+    },
+    {
+      "category": "beef",
+      "subcategory": "boneless",
+      "id": 4,
+      "quantity": ["1000 g"]
+    },
+    {
+      "category": "bread",
+      "subcategory": "sliced",
+      "id": 5,
+      "quantity": ["1 loaf"]
+    },
+    {
+      "category": "bread",
+      "subcategory": "unsliced",
+      "id": 6,
+      "quantity": ["1 loaf"]
+    },
+    {
+      "category": "chicken",
+      "subcategory": "feet",
+      "id": 7,
+      "quantity": ["1000 g"]
+    },
+    {
+      "category": "chicken",
+      "subcategory": "frozen",
+      "id": 8,
+      "quantity": ["1 unit"]
+    },
+    {
+      "category": "chicken",
+      "subcategory": "wings",
+      "id": 9,
+      "quantity": ["1000 g"]
+    },
+    {
+      "category": "eggs",
+      "subcategory": "agric",
+      "id": 10,
+      "quantity": ["12 pcs", "1 pcs"]
+    },
+    {
+      "category": "fish",
+      "subcategory": "catfish smoked",
+      "id": 11,
+      "quantity": ["1000 g"]
+    },
+    {
+      "category": "fish",
+      "subcategory": "fish",
+      "id": 12,
+      "quantity": ["1000 g"]
+    },
+    {
+      "category": "garri",
+      "subcategory": "white",
+      "id": 13,
+      "quantity": ["1000 g"]
+    },
+    {
+      "category": "garri",
+      "subcategory": "yellow",
+      "id": 14,
+      "quantity": ["1000 g"]
+    },
+    {
+      "category": "milk",
+      "subcategory": "evaporated tin",
+      "id": 15,
+      "quantity": ["1 unit"]
+    },
+    {
+      "category": "oil",
+      "subcategory": "groundnut",
+      "id": 16,
+      "quantity": ["1000 ml"]
+    },
+    {
+      "category": "oil",
+      "subcategory": "palm",
+      "id": 17,
+      "quantity": ["1000 ml"]
+    },
+    {
+      "category": "oil",
+      "subcategory": "vegetable",
+      "id": 18,
+      "quantity": ["1000 ml"]
+    },
+    {
+      "category": "potato",
+      "subcategory": "irish",
+      "id": 19,
+      "quantity": ["1000 g"]
+    },
+    {
+      "category": "potato",
+      "subcategory": "sweet",
+      "id": 20,
+      "quantity": ["1000 g"]
+    },
+    {
+      "category": "rice",
+      "subcategory": "imported",
+      "id": 21,
+      "quantity": ["1000 g"]
+    },
+    {
+      "category": "rice",
+      "subcategory": "local",
+      "id": 22,
+      "quantity": ["1000 g"]
+    },
+    {
+      "category": "rice",
+      "subcategory": "ofada",
+      "id": 23,
+      "quantity": ["1000 g"]
+    },
+    {
+      "category": "tomato",
+      "subcategory": "tomato",
+      "id": 24,
+      "quantity": ["1000 g"]
+    },
+    {
+      "category": "yam",
+      "subcategory": "tuber",
+      "id": 25,
+      "quantity": ["1000 g"]
+    }
+  ]
+  

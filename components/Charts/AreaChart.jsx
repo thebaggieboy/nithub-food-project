@@ -17,7 +17,7 @@ export default function AreaChartHero() {
  useEffect(() => {
   async function fetchFoodData(url){
 
-    console.log("fetching food data")
+
     const res = await fetch(url, {
         method: "GET",
         headers: {
@@ -39,7 +39,7 @@ export default function AreaChartHero() {
 }
 fetchFoodData('https://food-price-dashboard-be.onrender.com/nbs/year/?food_item=oil&item_type=vegetable&category=1000%20ml&year=2024')
 
- })
+ }, [])
   return (
   <>
      <div className="p-10">

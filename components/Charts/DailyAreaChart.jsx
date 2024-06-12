@@ -22,8 +22,8 @@ export default function AreaChartHero() {
                 "Content-Type": "application/json",
             },
         })
-        const data = await res.json()
-      
+
+        const data = await res.json() 
         setFoodData(data)
       
         if (res.status >= 200 & res.status <= 209) {
