@@ -10,17 +10,21 @@ import AverageChartOverYears from "./Charts/AverageChartOverYears"
 import { useState, Fragment, useEffect, use } from 'react'
 
 import {setItem, selectItem, selectItemType} from "../state/food_item/itemSlice"
+import { selectItemUrl, setItemUrl } from "@/state/food_item/urlSlice";
+
+
 
 export default function Main2() {
   
   const [foodData, setFoodData] = useState([])
 
   const item = useSelector(selectItem)
+  const item_url = useSelector(selectItemUrl) 
   const dispatch = useDispatch()
 
   useEffect(() => {
     async function fetch_average_month_price(url){
-      console.log("Fetching average month price")
+
       const res = await fetch(url, {
         method: "GET",
         headers: {
@@ -35,8 +39,7 @@ export default function Main2() {
       
       
         setFoodData(data)
-        dispatch(setItem(foodData))
-      
+       
       
 }
     }
@@ -45,6 +48,10 @@ export default function Main2() {
 
 
   }, [foodData])
+
+  
+  
+ 
   return (
     <>
      <div className="bg-gray-50  p-10">
@@ -58,7 +65,7 @@ export default function Main2() {
 
           <ul class="flex space-x-2 text-sm font-medium text-center ml-20 text-gray-500 dark:text-gray-400">
       <li class="me-2">
-      <h3 style={{color:"black", marginLeft:30, fontSize:25}} className="flex font-bold text-lg pt-1 text-black">₦{item?.current_month_price}</h3>
+      <h3 style={{color:"black", marginLeft:30, fontSize:25}} className="flex font-bold text-lg pt-1 text-black">₦{foodData?.current_month_price}</h3>
 
       </li>
       <li class="me-2 mt-1">

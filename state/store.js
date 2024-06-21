@@ -1,7 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import logger from 'redux-logger'
 import itemSlice from "./food_item/itemSlice"
+import itemUrlSlice from "./food_item/urlSlice"
 import itemTypeSlice from "./item_types/itemTypeSlice"
+
+
 
 import {
     persistStore, persistReducer, FLUSH,
@@ -16,12 +19,13 @@ import storage from 'redux-persist/lib/storage';
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ["item", "item_type"]
+    whitelist: ["item", "item_type", "item_url"]
 }
 
 const rootReducer = combineReducers({
     item : itemSlice,
     itemType : itemTypeSlice,
+    itemUrlSlice:itemUrlSlice
 
 })
 
