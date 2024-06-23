@@ -31,6 +31,7 @@ import { useSearchParams } from 'next/navigation'
 import itemSlice, { selectItem, setItem } from '@/state/food_item/itemSlice'
 import itemTypeSlice, { selectItemType, setItemType } from '@/state/item_types/itemTypeSlice'
 import {useDispatch,  useSelector } from 'react-redux'
+import { selectItemUrl, setItemUrl } from '@/state/food_item/urlSlice'
 
 
 const navigation = [
@@ -58,6 +59,7 @@ const content = (
 export default function NavBar() {
   const dispatch = useDispatch();
   const item = useSelector(selectItem)
+  const item_url = useSelector(selectItemUrl)
   const item_type = useSelector(selectItemType)
   const router = useRouter()
   const path_ = router.pathname
@@ -86,7 +88,8 @@ export default function NavBar() {
   const [quantity, setQuantity] = useState(null);
   const [selectedParentKey, setSelectedParentKey] = useState('');
   const [selectedChildKey, setSelectedChildKey] = useState('');
-
+  const [isLoading, setIsLoading ] = useState(true)
+    
   const [liveData, setLiveData] = useState([]);
   var results=[];
   var item_types_result = [];
@@ -147,8 +150,7 @@ export default function NavBar() {
     }
   }
   
-  const [isLoading, setIsLoading ] = useState(false)
-    
+ 
   function getQuantities(foodType) {
     const foodData = data[foodType];
     
@@ -216,7 +218,11 @@ const handleCategoryClick = async(event) => {
   setSelectedCategoryValue(event.target.value);
      
   const api_url = `https://food-price-dashboard-be.onrender.com/nbs/year/?food_item=${selectedValue}&item_type=${encodeURI(selectedItemValue)}&category=${encodeURI(selectedCategoryValue)}&year=2024`
-  setIsLoading(true);
+
+  if(isLoading == true){
+    console.log("Fetching ...")
+  }
+   
   if(selectedValue !== '' && selectedItemValue !== '' && selectedCategoryValue !== ''){
 
     console.log("API URL: ", api_url)
@@ -231,10 +237,19 @@ const handleCategoryClick = async(event) => {
     setLiveData(data)
     dispatch(setItem(liveData))
 
-     
+
+    console.log("Food Item: ", selectedValue)
+    console.log("Item Type: ", selectedItemValue)
+    console.log("Category: ", selectedCategoryValue)
+      
+
     if (res.status >= 200 & res.status <= 209) {
-     
+      dispatch( setItemUrl(api_url))
       setIsLoading(false)
+      setSelectedValue('')
+      setSelectedItemValue('')
+      setSelectedCategoryValue('')
+
 
       console.log("ITEM DATA: ", data)    
   

@@ -1,4 +1,4 @@
-export default useData(){
+export default useData(url){
     const res = await fetch(url, {
         method: "GET",
         headers: {

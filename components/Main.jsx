@@ -1,6 +1,7 @@
 import { useState, Fragment, useEffect } from 'react'
 
 
+
 import DailyAreaChart from "./Charts/DailyAreaChart"
 import AveragePerYearChart from "./Charts/AveragePerYearChart"
 
@@ -8,6 +9,7 @@ import AverageChartOverYears from "./Charts/AverageChartOverYears"
 
 import { useDispatch, useSelector } from "react-redux";
 import {setItem, selectItem, selectItemType} from "../state/food_item/itemSlice"
+import { LineChartHero } from './Charts/LineChart'
 
 const dummyData = [{"current_day":"2024-05-27","current_day_average_price":3239.21625,"percentage_change":0.0,"previous_day_avg_price":3239.21625}]
 
@@ -44,7 +46,7 @@ export default function Main() {
   
   }, [foodData])
   console.log("fetch_average_daily_price: ", foodData)
-  console.log("Item state: ", item?.data?.current_day_average_price)
+  console.log("Daily Item state: ", item?.data?.current_day_average_price)
         
   return (
     <>
@@ -90,7 +92,7 @@ export default function Main() {
         <DailyAreaChart/>
     </div>
     <div class="p-4">
-    <AveragePerYearChart/>
+    <LineChartHero/>
     
     </div>
     <div class="p-4">

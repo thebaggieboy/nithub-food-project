@@ -20,38 +20,31 @@ export default function AreaChartHero() {
   const item_url = useSelector(selectItemUrl)
    const dispatch = useDispatch()
 
+const fetchAreaChartData = async(url)=>{
+
+  const res = await fetch(api_url, {
+    method: "GET",  
+    headers: {
+  
+        "Content-Type": "application/json",
+    },
+  })
+  const data = await res.json()
+}
 
      
  useEffect(() => {
-  async function fetchFoodData(url){
-
-    const res = await fetch(url, {
-        method: "GET",
-        headers: {
-
-            "Content-Type": "application/json",
-        },
-    })
-    const data = await res.json()
-    setFoodData(data)
-    setLiveData(item)
   
-    if (res.status >= 200 & res.status <= 209) {
-  
-      setIsLoading(false)
-      console.log("Area Chart  Data: ", foodData)    
-      console.log("Area Chart  Live Data: ", liveData)    
-  
-}
+ if(item !== null) {
+  setLiveData(item)
+  setIsLoading(false)
+  console.log("Area Chart Item: ", liveData)
 
+ 
 
+ }
 
-}
-fetchFoodData('https://food-price-dashboard-be.onrender.com/nbs/year/?food_item=oil&item_type=vegetable&category=1000%20ml&year=2024')
-
-
-
- }, [foodData])
+ }, [])
 
 
 if(isLoading == true){
@@ -100,7 +93,7 @@ if(isLoading == true){
      <div className="p-10">
      <AreaChart
         className="mt-4 p-10 h-72"
-        data={liveData?.data}
+        data={item?.data}
         index="date"
         categories={['value']}
         colors={['green', 'red']}

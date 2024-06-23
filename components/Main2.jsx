@@ -12,6 +12,9 @@ import { useState, Fragment, useEffect, use } from 'react'
 import {setItem, selectItem, selectItemType} from "../state/food_item/itemSlice"
 import { selectItemUrl, setItemUrl } from "@/state/food_item/urlSlice";
 
+import { LineChartHero } from './Charts/LineChart'
+import { DonutChart } from "@tremor/react";
+
 
 
 export default function Main2() {
@@ -20,6 +23,8 @@ export default function Main2() {
 
   const item = useSelector(selectItem)
   const item_url = useSelector(selectItemUrl) 
+  const default_url = "https://food-price-dashboard-be.onrender.com/nbs/mom-percentage/?food_item=oil&item_type=vegetable&category=1000%20ml&year=2024"
+  
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -122,10 +127,10 @@ export default function Main2() {
         <AreaChart/>
     </div>
     <div class=" p-4">
-        <AveragePerYearChart/>
+    <AverageChartOverYears/>
     </div>
     <div style={{float:"right"}} class=" p-4">
-        <AverageChartOverYears/>
+       
     </div>
 
   

@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "../../../.."
+		},
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../../../../../../../My Web Sites/kk"
+		},
+		{
+			"path": "../../../../../Projects/automation"
+		},
+		{
+			"path": "../../../../../Projects"
+		},
+		{
+			"path": "../../../../../ALTCLAN"
+		}
+	],
+	"settings": {
+		"git.ignoreLimitWarning": true
+	}
+}
