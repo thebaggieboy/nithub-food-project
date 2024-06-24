@@ -1,3 +1,4 @@
+import { selectActiveItem, setActiveItem } from '@/state/food_item/activeFoodItemSlice';
 import { selectItem } from '@/state/food_item/itemSlice';
 import { selectItemType } from '@/state/item_types/itemTypeSlice';
 
@@ -17,8 +18,13 @@ export default function AveragePerYearChart() {
     const [isLoading, setIsLoading ] = useState(true)
     
   const item = useSelector(selectItem)
+  const active_item = useSelector(selectActiveItem)
+
+  
+
   const dispatch = useDispatch()
   useEffect(() => {
+    //setLiveData(item)
     async function fetchFoodData(url){
   
       const res = await fetch(url, {
@@ -31,7 +37,7 @@ export default function AveragePerYearChart() {
       const data = await res.json()
     
       setFoodData(data)
-      setLiveData(item)
+     
       if (res.status >= 200 & res.status <= 209) {
         
        
@@ -43,7 +49,7 @@ export default function AveragePerYearChart() {
   
   
   }
-  fetchFoodData('https://food-price-dashboard-be.onrender.com/nbs/average-item-types-price/?food_item=oil&item_type=vegetable&category=1000%20ml&year=2024')
+  fetchFoodData( `https://food-price-dashboard-be.onrender.com/nbs/average-item-types-price/?food_item=${active_item !== null ? active_item : 'oil'}`)
   
   
   

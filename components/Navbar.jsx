@@ -32,6 +32,9 @@ import itemSlice, { selectItem, setItem } from '@/state/food_item/itemSlice'
 import itemTypeSlice, { selectItemType, setItemType } from '@/state/item_types/itemTypeSlice'
 import {useDispatch,  useSelector } from 'react-redux'
 import { selectItemUrl, setItemUrl } from '@/state/food_item/urlSlice'
+import { selectActiveCategory, setActiveCategory } from '@/state/category/activeCategorySlice'
+import { selectActiveItem, setActiveItem } from '@/state/food_item/activeFoodItemSlice'
+import { selectActiveItemType, setActiveItemType } from '@/state/item_types/activeItemType'
 
 
 const navigation = [
@@ -60,7 +63,11 @@ export default function NavBar() {
   const dispatch = useDispatch();
   const item = useSelector(selectItem)
   const item_url = useSelector(selectItemUrl)
-  const item_type = useSelector(selectItemType)
+  const active_item = useSelector(selectActiveItem)
+  const active_item_type = useSelector(selectActiveItemType)
+  const active_category = useSelector(selectActiveCategory)
+
+  
   const router = useRouter()
   const path_ = router.pathname
   const searchParams = useSearchParams();
@@ -181,6 +188,8 @@ export default function NavBar() {
 
 const handleChange = (event) => {
   setSelectedValue(event.target.value);
+  dispatch(setActiveItem(event.target.value));
+  console.log("Active Food Item: ", active_item)
   const category = event.target.value;
   setSelectedCategory(category);
   // Destructure the data to get sub-options
@@ -212,11 +221,16 @@ const quantities_result = getQuantities(selectedValue);
   
 const handleItemTypeChange = (event) => {
   setSelectedItemValue(event.target.value);
+
+  dispatch(setActiveItemType(event.target.value));
+  console.log("Active Item Type: ", active_item_type)
+
 }
 
 const handleCategoryClick = async(event) => {
   setSelectedCategoryValue(event.target.value);
-     
+  dispatch(setActiveCategory(event.target.value));
+  console.log("Active Category: ", active_category)
   const api_url = `https://food-price-dashboard-be.onrender.com/nbs/year/?food_item=${selectedValue}&item_type=${encodeURI(selectedItemValue)}&category=${encodeURI(selectedCategoryValue)}&year=2024`
 
   if(isLoading == true){

@@ -20,27 +20,30 @@ export default function AreaChartHero() {
   const item_url = useSelector(selectItemUrl)
    const dispatch = useDispatch()
 
-   const fetchAreaChartData = async()=>{
+const fetchAreaChartData = async(url)=>{
+
+  const res = await fetch(api_url, {
+    method: "GET",  
+    headers: {
   
-    const res = await fetch(api_url, {
-      method: "GET",  
-      headers: {
-    
-          "Content-Type": "application/json",
-      },
-    })
-    const data = await res.json()
-  }
+        "Content-Type": "application/json",
+    },
+  })
+  const data = await res.json()
+}
+
+     
  useEffect(() => {
   
  if(item !== null) {
   setLiveData(item)
-  setIsLoading(false)
+ 
   console.log("Area Chart Item: ", liveData)
 
  
 
  }
+ setIsLoading(false)
 
  }, [])
 
