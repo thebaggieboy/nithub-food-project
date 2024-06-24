@@ -18,7 +18,7 @@ export default function AreaChartHero() {
     const [value, setValue] = useState(null);
     const [foodData, setFoodData] = useState([])
     const [liveData, setLiveData] = useState([])
-    const [isLoading, setIsLoading ] = useState(false)
+    const [isLoading, setIsLoading ] = useState(true)
     const item = useSelector(selectItem)
     const item_url = useSelector(selectItemUrl)
     const active_item = useSelector(selectActiveItem)
@@ -42,6 +42,7 @@ export default function AreaChartHero() {
     const data = await res.json()
   
     setFoodData(data)
+    dispatch(setItem(data))
     
     console.log("Area Food Data: ", foodData)
     if (res.status >= 200 & res.status <= 209) {

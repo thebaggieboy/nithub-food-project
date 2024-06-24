@@ -124,7 +124,7 @@ export default function Main2() {
   
 
      </div>
-     <div class=" bg-gray-50 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 p-10">
+     <div class=" bg-gray-50 grid grid-cols-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 p-10">
     <div class=" p-4">
         <AreaChart/>
     </div>

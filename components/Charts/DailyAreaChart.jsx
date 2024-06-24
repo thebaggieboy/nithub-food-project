@@ -1,5 +1,8 @@
+import { selectActiveCategory, setActiveCategory } from '@/state/category/activeCategorySlice';
+import { selectActiveItem, setActiveItem, setActiveItemType } from '@/state/food_item/activeFoodItemSlice';
 import { selectItem, setItem } from '@/state/food_item/itemSlice';
 import { selectItemUrl, setItemUrl } from '@/state/food_item/urlSlice';
+import { selectActiveItemType } from '@/state/item_types/activeItemType';
 import { selectItemType } from '@/state/item_types/itemTypeSlice';
 import { AreaChart, EventProps } from '@tremor/react';
 import { useState, Fragment, useEffect } from 'react'
@@ -17,30 +20,41 @@ export default function AreaChartHero() {
     const [liveData, setLiveData] = useState([])
     const [isLoading, setIsLoading ] = useState(true)
     const item = useSelector(selectItem)
-  const item_url = useSelector(selectItemUrl)
+    const item_url = useSelector(selectItemUrl)
+    const active_item = useSelector(selectActiveItem)
+    const active_item_type = useSelector(selectActiveItemType)
+    const active_category = useSelector(selectActiveCategory)
    const dispatch = useDispatch()
 
-   const fetchAreaChartData = async()=>{
+
+ useEffect(() => {
+  const api_url = `https://food-price-dashboard-be.onrender.com/nbs/year/?food_item=${active_item !== null ? active_item : 'oil' }&item_type=${encodeURI(active_item_type !== null ? active_item_type : 'vegetable')}&category=${encodeURI(active_category !== null ? active_category : '1000 ml') }&year=2024`
+
+  async function fetchFoodData(url){
   
-    const res = await fetch(api_url, {
-      method: "GET",  
-      headers: {
-    
-          "Content-Type": "application/json",
-      },
+    const res = await fetch(url, {
+        method: "GET",
+        headers: {
+
+            "Content-Type": "application/json",
+        },
     })
     const data = await res.json()
-  }
- useEffect(() => {
   
- if(item !== null) {
-  setLiveData(item)
-  setIsLoading(false)
-  console.log("Area Chart Item: ", liveData)
+    setFoodData(data)
+    dispatch(setItem(data))
+    
+    console.log("Area Food Data: ", foodData)
+    if (res.status >= 200 & res.status <= 209) {
+      setIsLoading(false)
+          
+  
+}
 
- 
+}
 
- }
+fetchFoodData(`https://food-price-dashboard-be.onrender.com/nbs/year/?food_item=${active_item !== null ? active_item : 'oil' }&item_type=${encodeURI(active_item_type !== null ? active_item_type : 'vegetable')}&category=${encodeURI(active_category !== null ? active_category : '1000 ml') }&year=2024`)
+
 
  }, [])
 
@@ -91,7 +105,7 @@ if(isLoading == true){
      <div className="p-10">
      <AreaChart
         className="mt-4 p-10 h-72"
-        data={item?.data}
+        data={foodData?.data}
         index="date"
         categories={['value']}
         colors={['green', 'red']}

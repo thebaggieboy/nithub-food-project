@@ -1,12 +1,15 @@
+import { selectActiveCategory } from '@/state/category/activeCategorySlice';
+import { selectActiveItem } from '@/state/food_item/activeFoodItemSlice';
 import { selectItem, setItem } from '@/state/food_item/itemSlice';
 import { selectItemUrl, setItemUrl } from '@/state/food_item/urlSlice';
+import { selectActiveItemType } from '@/state/item_types/activeItemType';
 import { selectItemType } from '@/state/item_types/itemTypeSlice';
 import { AreaChart, EventProps } from '@tremor/react';
 import { useState, Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
 
-
+selectActiveCategory
 
 const dataFormatter = (number) =>
   `$${Intl.NumberFormat('us').format(number).toString()}`;
@@ -18,6 +21,9 @@ export default function AverageAreaChart() {
     const [isLoading, setIsLoading ] = useState(true)
     const item = useSelector(selectItem)
   const item_url = useSelector(selectItemUrl)
+  const active_item = useSelector(selectActiveItem)
+  const active_item_type = useSelector(selectActiveItemType)
+  const active_category = useSelector(selectActiveCategory)
    const dispatch = useDispatch()
 
 const fetchAreaChartData = async(url)=>{
@@ -34,16 +40,32 @@ const fetchAreaChartData = async(url)=>{
 
      
  useEffect(() => {
+  const url = `https://food-price-dashboard-be.onrender.com/`
+  async function fetchFoodData(url){
   
- if(item !== null) {
-  setLiveData(item)
- 
-  console.log("Area Chart Item: ", liveData)
+    const res = await fetch(url, {
+        method: "GET",
+        headers: {
 
- 
+            "Content-Type": "application/json",
+        },
+    })
+    const data = await res.json()
+  
+    setFoodData(data)
+    dispatch(setItem(data))
+    
+    console.log("Area Food Data: ", foodData)
+    if (res.status >= 200 & res.status <= 209) {
+      setIsLoading(false)
+          
+  
+}
 
- }
- setIsLoading(false)
+}
+
+fetchFoodData(`https://food-price-dashboard-be.onrender.com/nbs/average-price-over-years/?food_item=${active_item !== null ? active_item : 'oil' }&item_type=${encodeURI(active_item_type !== null ? active_item_type : 'vegetable')}&category=${encodeURI(active_category !== null ? active_category : '1000 ml') }`)
+
 
  }, [])
 
@@ -94,9 +116,9 @@ if(isLoading == true){
      <div className="p-10">
      <AreaChart
         className="mt-4 p-10 h-72"
-        data={item?.data}
-        index="date"
-        categories={['value']}
+        data={foodData?.data}
+        index="year"
+        categories={['average_price']}
         colors={['green', 'red']}
         yAxisWidth={65}
         onValueChange={(v) => setValue(v)}
