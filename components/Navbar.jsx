@@ -102,6 +102,8 @@ export default function NavBar() {
   var item_types_result = [];
   var category_result = []
 
+
+
   const data =  {
     "beans": {
       "brown": {"id": 1, "quantity": ["1000 g"]},
@@ -231,7 +233,7 @@ const handleCategoryClick = async(event) => {
   setSelectedCategoryValue(event.target.value);
   dispatch(setActiveCategory(event.target.value));
   console.log("Active Category: ", active_category)
-  const api_url = `https://food-price-dashboard-be.onrender.com/nbs/year/?food_item=${selectedValue}&item_type=${encodeURI(selectedItemValue)}&category=${encodeURI(selectedCategoryValue)}&year=2024`
+  const api_url = `https://food-price-dashboard-be.onrender.com/nbs/year/?food_item=${active_item !== null ? active_item : 'oil' }&item_type=${encodeURI(active_item_type !== null ? active_item_type : 'vegetable')}&category=${encodeURI(active_category !== null ? active_category : '1000 ml') }&year=2024`
 
   if(isLoading == true){
     console.log("Fetching ...")
