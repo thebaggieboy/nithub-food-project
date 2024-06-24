@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const dataFormatter = (number) =>
   `$${Intl.NumberFormat('us').format(number).toString()}`;
 
-export default function AreaChartHero() {
+export default function AverageAreaChart() {
     const [value, setValue] = useState(null);
     const [foodData, setFoodData] = useState([])
     const [liveData, setLiveData] = useState([])

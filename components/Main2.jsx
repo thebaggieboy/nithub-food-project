@@ -1,4 +1,5 @@
 import AreaChart from "./Charts/AreaChart"
+import AverageAreaChart from "./Charts/AverageAreaChart"
 
 import Date from "./DatePicker"
 import { Dropdown } from "flowbite-react";
@@ -12,6 +13,7 @@ import { useState, Fragment, useEffect, use } from 'react'
 import {setItem, selectItem, selectItemType} from "../state/food_item/itemSlice"
 import { selectItemUrl, setItemUrl } from "@/state/food_item/urlSlice";
 
+ 
 import { LineChartHero } from './Charts/LineChart'
 import { DonutChart } from "@tremor/react";
 
@@ -130,7 +132,7 @@ export default function Main2() {
     <AverageChartOverYears/>
     </div>
     <div style={{float:"right"}} class=" p-4">
-       
+       <AverageAreaChart/>
     </div>
 
   
